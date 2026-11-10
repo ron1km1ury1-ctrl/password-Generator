@@ -1,38 +1,39 @@
 # PASSWORD GENERATOR
 
-A simple Windows desktop app that generates a random password, shows it in a GUI window, and refreshes it automatically every 60 seconds.
+A small Windows desktop app that creates random passwords and can refresh the displayed password every 60 seconds.
 
-## What it does
-- Generates a password between 8 and 128 characters
-- Uses letters, numbers, and special characters
-- Refreshes the displayed password every 60 seconds
-- Lets you copy the current password to your clipboard
-- Runs as a desktop app on Windows
+## Features
+- Choose a password length from 8 to 128 characters
+- Uses Python's `secrets` module to select letters, digits, and symbols
+- Copy the displayed password to the clipboard
+- Optional automatic refresh every 60 seconds
+- Custom shield-and-lock application icon
+- Builds as a standalone Windows executable
 
-## Important note
-This app does not change your laptop or device login password. It only changes the password shown inside the app window.
+## Build and run on Windows
+1. Install Python from [python.org](https://www.python.org/downloads/). During setup, enable the Python launcher (`py`) and add Python to PATH.
+2. Download this repository and extract it, or clone it with Git.
+3. Keep the project files together in one folder.
+4. Double-click `BUILD_PASSWORD_GENERATOR.bat`.
+5. When the build completes, open `dist\\PASSWORD GENERATOR.exe`.
 
-## Run it on your laptop
-1. Install Python from: https://www.python.org/downloads/
-2. Make sure the Python launcher is added to PATH during installation.
-3. Download or clone this repository to your laptop.
-4. Open the project folder.
-5. Double-click `BUILD_PASSWORD_GENERATOR.bat`.
-6. Wait for the build to finish.
-7. Open the generated file in the `dist` folder:
-   `dist\PASSWORD GENERATOR.exe`
+The build script creates `app_icon.ico` from `make_icon.py` and uses PyInstaller to build the executable. It may need an internet connection the first time to install PyInstaller.
 
-## Files in this repository
-- `PASSWORD_GENERATOR.py` — the application code
-- `BUILD_PASSWORD_GENERATOR.bat` — builds the Windows executable using PyInstaller
+## Run from Python instead
+Open a terminal in the project folder and run:
 
-## Build command used
 ```bat
-py -m PyInstaller --onefile --windowed --clean --name "PASSWORD GENERATOR" PASSWORD_GENERATOR.py
+py PASSWORD_GENERATOR.py
 ```
 
-## Publish to GitHub
-1. Upload this repository to GitHub.
-2. Create a Release.
-3. Attach the built `dist\PASSWORD GENERATOR.exe` file.
-4. Share the Release link with users.
+## Publish a Windows download on GitHub
+After building, open the repository's **Releases** page, draft a release, and attach `dist\\PASSWORD GENERATOR.exe`. The executable is built for Windows; build it on Windows for best compatibility.
+
+## Security and privacy
+Passwords are generated locally on your computer using Python's cryptographically strong `secrets` module. This app does not send passwords over the internet or change your Windows/device login password. The app replaces the displayed password when automatic refresh is running, so copy and save any password you intend to use before it refreshes.
+
+## Project files
+- `PASSWORD_GENERATOR.py` — desktop app source
+- `BUILD_PASSWORD_GENERATOR.bat` — Windows build helper
+- `make_icon.py` — creates the Windows `.ico` icon using only Python's standard library
+- `app_icon.svg` — editable vector artwork for the app icon
